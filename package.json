@@ -1,0 +1,57 @@
+{
+  "cacheDirectories": [
+    ".next/cache"
+  ],
+  "name": "food-ordering-app",
+  "private": true,
+  "engines": {
+    "node": "14.19.0"
+  },
+  "extends": "next",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p $PORT",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.3.1",
+    "@mui/material": "^5.4.0",
+    "@mui/utils": "^5.3.0",
+    "@paypal/react-paypal-js": "^7.5.1",
+    "@reduxjs/toolkit": "^1.7.1",
+    "@tinymce/tinymce-react": "^3.13.0",
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
+    "cookie": "^0.4.1",
+    "js-cookie": "^3.0.1",
+    "local-storage": "^2.0.0",
+    "localStorage": "^1.0.4",
+    "mapbox-gl": "^2.7.0",
+    "mongoose": "^6.1.6",
+    "mongoose-paginate-v2": "^1.5.0",
+    "next": "12.0.7",
+    "nodemailer": "^6.7.2",
+    "nprogress": "^0.2.0",
+    "pure-react-carousel": "^1.27.8",
+    "query-string": "^7.1.0",
+    "rc-slider": "^9.7.5",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-map-gl": "^7.0.2",
+    "react-multi-carousel": "^2.6.5",
+    "react-paginate": "^8.1.0",
+    "react-redux": "^7.2.6",
+    "react-render-markup": "^3.4.0"
+  },
+  "devDependencies": {
+    "eslint": "8.6.0",
+    "eslint-config-next": "12.0.7"
+  }
+}
