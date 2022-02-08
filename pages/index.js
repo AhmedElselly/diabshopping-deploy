@@ -7,9 +7,7 @@ import styles from '../styles/Home.module.css'
 import Featured from '../components/Featured'
 import ProductList from '../components/ProductList'
 import ByCategory from '../components/ByCategory'
-import dbConnect from '../utils/mongo'
-import Product from '../models/Product';
-
+import Error from 'next/error';
 import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
 import queryString from 'query-string';
@@ -37,6 +35,10 @@ const Home = ({productsList, byCategories, categories}) => {
 
   const handleRoute = (cat) => {
     router.push(`/products?search=${cat}`)
+  }
+
+  if(!productsList || !byCategories || categories){
+    return <Error statusCode={503} />
   }
 
   return (
