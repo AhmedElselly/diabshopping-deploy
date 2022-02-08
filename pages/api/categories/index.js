@@ -3,7 +3,7 @@ import Category from '../../../models/Category';
 
 const handler = async (req, res) => {
     const {method} = req;
-
+    await dbConnect();
     if(method === 'POST'){
         const category = await new Category(req.body);
              

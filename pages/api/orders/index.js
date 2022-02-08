@@ -3,7 +3,7 @@ import Order from '../../../models/Order';
 
 const handler = async (req, res) => {
 	const {method} = req;
-	dbConnect();
+	await dbConnect();
 	if(method === 'GET'){
 		try{
 			const orders = await Order.find().sort('-createdAt');

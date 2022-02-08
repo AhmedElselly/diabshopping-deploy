@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 
 const handler = async (req, res) => {
 	const {method} = req;
-	dbConnect();
+	await dbConnect();
 
 	if(method === 'POST'){
 	

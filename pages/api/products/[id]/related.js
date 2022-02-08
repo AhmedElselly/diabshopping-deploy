@@ -3,7 +3,7 @@ import Product from "../../../../models/Product";
 
 const handler = async (req, res) => {
 	const {method, query: {id}} = req;
-	dbConnect();
+	await dbConnect();
 	console.log(id)
 	if(method === 'GET'){
 		const product = await Product.findById(id);

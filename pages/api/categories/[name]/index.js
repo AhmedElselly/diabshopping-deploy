@@ -3,7 +3,7 @@ import Category from '../../../../models/Category';
 
 const handler = async (req, res) => {
     const {method, query: {name}} = req;
-
+    await dbConnect();
     if(method === 'PUT'){
         const category = await Category.findOne({name});
         

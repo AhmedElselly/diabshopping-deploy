@@ -3,7 +3,7 @@ import Product from '../../../models/Product';
 
 const handler = async (req, res) => {
 	const {method, query} = req;
-	dbConnect();
+	await dbConnect();
 	if(method === 'GET'){
 		if(query.search || query.min || query.max){
 			console.log('querymongo', query)
