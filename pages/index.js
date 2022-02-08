@@ -16,7 +16,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import CategoryCard from '../components/CategoryCard'
 
-const Home = ({productsList, byCategories, categories}) => {
+const Home = ({errorCode, productsList, byCategories, categories}) => {
   const router = useRouter();
   const [search, setSearch] = useState('');
   const [products, setProducts] = useState([]);
@@ -37,9 +37,6 @@ const Home = ({productsList, byCategories, categories}) => {
     router.push(`/products?search=${cat}`)
   }
 
-  if(!productsList || !byCategories || categories){
-    return <Error statusCode={503} />
-  }
 
   return (
     <div className={styles.container}>
@@ -98,7 +95,10 @@ export const getServerSideProps = async (ctx) => {
   const url = 'https://diabshopping-deploy.vercel.app/api';
   const res = await axios.get(`${url}/products/home`);
   const byCategories = await axios.get(`${url}/products/categories`);
-  const categories = await axios.get(`${url}/categories`)
+  const categories = await axios.get(`${url}/categories`);
+
+  const errorCode = res.ok ? false : res.statusCode;
+
   return {
     props: {
       productsList: res.data.products,
