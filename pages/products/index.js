@@ -12,7 +12,7 @@ import 'rc-slider/assets/index.css';
 import Loading from '../../components/Loading';
 import CategoryCard from '../../components/CategoryCard';
 
-const url = 'https://diabshopping-deploy.vercel.app/api';
+const url = 'https://api-diabshopping.herokuapp.com/api';
 
 const Products = (props) => {
 	const [search, setSearch] = useState('');
@@ -205,7 +205,7 @@ export const getServerSideProps = async ctx => {
 	const page = ctx.query.page || 1;
 	const {min, max, search} = ctx.query;
 	console.log('ctx.query', ctx.query)
-	const res = await axios.get(`${url}/products`, {
+	const res = await axios.get(`${url}/posts`, {
 		params: {
 			page,
 			min,

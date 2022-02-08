@@ -6,6 +6,10 @@ module.exports = {
         source: '/api/:path*',
         destination: 'https://diabshopping.herokuapp.com/api/:path*',
       },
+      {
+        source: '/api/orders',
+        destination: 'https://diabshopping.herokuapp.com/api/orders',
+      }
     ]
   },
   eslint: {

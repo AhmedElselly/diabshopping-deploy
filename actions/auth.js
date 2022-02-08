@@ -1,6 +1,6 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
-const url = 'https://diabshopping-deploy.vercel.app/api';
+const url = 'https://api-diabshopping.herokuapp.com/api';
 
 export const login = async (email, password) => {
     const res = await axios.post(`${url}/login`, {email, password});

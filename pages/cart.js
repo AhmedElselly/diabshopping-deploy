@@ -34,14 +34,14 @@ const Cart = props => {
 		}
 	}, [success]);
 
-	const url = 'https://diabshopping-deploy.vercel.app/api';
+	const url = 'https://api-diabshopping.herokuapp.com/api/orders/create';
 
 	const createOrder = async data => {
 		
 		try {
 			console.log('data', data)
 			
-			const res = await axios.post(`${url}/orders`, data);
+			const res = await axios.post(`${url}`, data);
 			console.log(res.data)
 			setSuccess(true);
 			setSuccessMessage('تم الطلب وسيتم التواصل معك قريبا')

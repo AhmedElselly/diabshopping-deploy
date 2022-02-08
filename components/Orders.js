@@ -3,8 +3,15 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from '../styles/Orders.module.css';
 import {getOrders} from '../actions/orders';
+import useSWR from 'swr';
+
+
+// const fetcher = url => axios.get(url).then(res => res.data);
+
 
 const Orders = props => {
+	// const url = 'https://diabshopping-deploy.vercel.app/api';
+	// const {data, error} = useSWR(`/api/orders`, fetcher);
 	const [orders, setOrders] = useState([]);
 
 	useEffect(() => {
@@ -12,7 +19,9 @@ const Orders = props => {
 			console.log(res.data);
 			setOrders(res.data);
 		})
+		// setOrders(data);
 	}, []);
+
 
 	const generateOrders = () => {
 		return orders?.map(order => {

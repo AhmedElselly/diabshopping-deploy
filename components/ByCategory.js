@@ -6,9 +6,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import useSWR from 'swr'
 
-
-const url = 'https://diabshopping-deploy.vercel.app/api/products';
+const url = 'https://api-diabshopping.herokuapp.com/api';
 const ByCategory = ({category}) => {
 
 	const responsive = {
@@ -37,12 +37,13 @@ const ByCategory = ({category}) => {
 	const [posts, setPosts] = useState([]);
 	
 	useEffect(() => {
-		async function fetchData(){
-			const res = await axios.get(`${url}/category/${category}`)
+		const fetchData = async () => {
+			const res = await axios.get(`${url}/posts/byCategory/${category}`);
+			console.log(res.data)
 			setPosts(res.data);
 		}
 		fetchData()
-	}, []);
+	}, [category]);
 
 	const handleClick = direction => {
 		let distance = listRef.current.getBoundingClientRect().x - 5;

@@ -6,7 +6,7 @@ import {useRouter} from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
 
-const url = 'https://diabshopping.herokuapp.com/api/categories';
+const url = 'http://localhost:8000/api/categories';
 
 const UpdateCard = ({post}) => {
 	const router = useRouter()
@@ -75,7 +75,7 @@ const UpdateCard = ({post}) => {
 		}
 		
 		desc = editorRef.current.getContent();
-		const urlCreate = 'https://diabshopping-deploy.vercel.app/api/products';
+		const urlCreate = 'http://localhost:8000/api/posts/product';
 		const res = await axios.put(`${urlCreate}/${_id}/update`, {
 			title,
 			subtitle,
@@ -194,7 +194,7 @@ const UpdateCard = ({post}) => {
 }
 
 export const getServerSideProps = async ctx => {
-	const url = 'https://diabshopping-deploy.vercel.app/api/products'
+	const url = 'http://localhost:8000/api/posts/product'
 	const res = await axios.get(`${url}/${ctx.query.id}`);
 
 	return {

@@ -55,7 +55,7 @@ const Create = props => {
 		const {url} = upload.data;
 		console.log(url)
 		desc = editorRef.current.getContent();
-		const urlCreate = 'https://diabshopping-deploy.vercel.app/api/products';
+		const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts';
 		const res = await axios.post(`${urlCreate}`, {
 			title,
 			subtitle,

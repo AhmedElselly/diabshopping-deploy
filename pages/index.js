@@ -92,16 +92,16 @@ const Home = ({errorCode, productsList, byCategories, categories}) => {
 
 export const getServerSideProps = async (ctx) => {
   const myCookie = ctx.req.cookies;
-  const url = 'https://diabshopping-deploy.vercel.app/api';
-  const res = await axios.get(`${url}/products/home`);
-  const byCategories = await axios.get(`${url}/products/categories`);
+  const url = 'https://api-diabshopping.herokuapp.com/api';
+  const res = await axios.get(`${url}/posts/home`);
+  const byCategories = await axios.get(`${url}/posts/byCategories`);
   const categories = await axios.get(`${url}/categories`);
 
   console.log(byCategories.data)
 
   return {
     props: {
-      productsList: res.data.products,
+      productsList: res.data,
       byCategories: byCategories.data,
       categories: categories.data
     }

@@ -127,9 +127,9 @@ const Product = ({product, categories}) => {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const url = 'https://diabshopping-deploy.vercel.app/api/products';
-  const res = await axios.get(`${url}/${ctx.params.id}`);
-	const categories = await axios.get(`${url}/categories`);
+  const url = 'https://api-diabshopping.herokuapp.com/api/posts';
+  const res = await axios.get(`${url}/product/${ctx.params.id}`);
+	const categories = await axios.get(`${url}/byCategories`);
   return {
     props: {
       product: res.data,
