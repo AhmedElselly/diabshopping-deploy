@@ -98,7 +98,7 @@ export const getServerSideProps = async (ctx) => {
   const categories = await axios.get(`${url}/categories`)
   return {
     props: {
-      productsList: res.data,
+      productsList: res.data.products,
       byCategories: byCategories.data,
       categories: categories.data
     }
