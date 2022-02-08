@@ -34,7 +34,7 @@ const Cart = props => {
 		}
 	}, [success]);
 
-	const url = 'http://localhost:3000/api';
+	const url = 'https://diabshopping-deploy.vercel.app/api';
 
 	const createOrder = async data => {
 		

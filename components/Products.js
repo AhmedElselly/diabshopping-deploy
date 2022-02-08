@@ -20,7 +20,7 @@ const Products = props => {
 	}
 
 	const handleRemove = async (id) => {
-		const url = 'http://localhost:3000/api/products';
+		const url = 'https://diabshopping-deploy.vercel.app/api/products';
 		const res = await axios.delete(`${url}/${id}`);
 		
 		setPosts(posts.filter(post => post._id !== id));

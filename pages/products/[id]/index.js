@@ -127,7 +127,7 @@ const Product = ({product, categories}) => {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const url = 'http://localhost:3000/api/products';
+  const url = 'https://diabshopping-deploy.vercel.app/api/products';
   const res = await axios.get(`${url}/${ctx.params.id}`);
 	const categories = await axios.get(`${url}/categories`);
   return {

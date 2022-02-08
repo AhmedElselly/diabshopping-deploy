@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000/api/products';
+const url = 'https://diabshopping-deploy.vercel.app/api/products';
 
 export const featuredPosts = async () => {
     const res = await axios.get(`${url}/home`);

@@ -75,7 +75,7 @@ const UpdateCard = ({post}) => {
 		}
 		
 		desc = editorRef.current.getContent();
-		const urlCreate = 'http://localhost:3000/api/products';
+		const urlCreate = 'https://diabshopping-deploy.vercel.app/api/products';
 		const res = await axios.put(`${urlCreate}/${_id}/update`, {
 			title,
 			subtitle,
@@ -194,7 +194,7 @@ const UpdateCard = ({post}) => {
 }
 
 export const getServerSideProps = async ctx => {
-	const url = 'http://localhost:3000/api/products'
+	const url = 'https://diabshopping-deploy.vercel.app/api/products'
 	const res = await axios.get(`${url}/${ctx.query.id}`);
 
 	return {

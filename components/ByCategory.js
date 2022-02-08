@@ -8,7 +8,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 
-const url = 'http://localhost:3000/api/products';
+const url = 'https://diabshopping-deploy.vercel.app/api/products';
 const ByCategory = ({category}) => {
 
 	const responsive = {

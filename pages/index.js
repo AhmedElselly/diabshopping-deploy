@@ -7,7 +7,8 @@ import styles from '../styles/Home.module.css'
 import Featured from '../components/Featured'
 import ProductList from '../components/ProductList'
 import ByCategory from '../components/ByCategory'
-
+import dbConnect from '../utils/mongo'
+import Product from '../models/Product';
 
 import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
@@ -92,7 +93,7 @@ const Home = ({productsList, byCategories, categories}) => {
 
 export const getServerSideProps = async (ctx) => {
   const myCookie = ctx.req.cookies;
-  const url = 'http://localhost:3000/api';
+  const url = 'https://diabshopping-deploy.vercel.app/api';
   const res = await axios.get(`${url}/products/home`);
   const byCategories = await axios.get(`${url}/products/categories`);
   const categories = await axios.get(`${url}/categories`)

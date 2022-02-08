@@ -12,7 +12,7 @@ import 'rc-slider/assets/index.css';
 import Loading from '../../components/Loading';
 import CategoryCard from '../../components/CategoryCard';
 
-const url = 'http://localhost:3000/api';
+const url = 'https://diabshopping-deploy.vercel.app/api';
 
 const Products = (props) => {
 	const [search, setSearch] = useState('');
