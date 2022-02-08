@@ -6,7 +6,7 @@ import {useRouter} from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
 
-const url = 'http://localhost:3000/api/categories';
+const url = 'https://diabshopping.herokuapp.com/api/categories';
 
 const UpdateCard = ({post}) => {
 	const router = useRouter()

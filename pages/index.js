@@ -97,7 +97,7 @@ export const getServerSideProps = async (ctx) => {
   const byCategories = await axios.get(`${url}/products/categories`);
   const categories = await axios.get(`${url}/categories`);
 
-  const errorCode = res.ok ? false : res.statusCode;
+  console.log(byCategories.data)
 
   return {
     props: {

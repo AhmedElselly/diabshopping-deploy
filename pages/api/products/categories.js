@@ -5,12 +5,10 @@ const handler = async (req, res) => {
 	const {method} = req;
 	await dbConnect();
 	if(method === 'GET'){
-		try{
-			const products = await Product.distinct('category');
-			return res.json(products);
-		} catch(err){
-			res.status(500).json(err);
-		}
+		
+		const products = await Product.distinct('category');
+		return res.json(products);
+	
 	}
 
 	

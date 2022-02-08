@@ -4,7 +4,7 @@ module.exports = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://diabshopping.herokuapp.com/:path*',
+        destination: 'https://diabshopping.herokuapp.com/api/:path*',
       },
     ]
   },
