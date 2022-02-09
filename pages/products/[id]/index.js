@@ -111,15 +111,19 @@ const Product = ({product, categories}) => {
 				)}
 				
 				<div className={styles.add}>
+					<label style={{
+						marginLeft: 5,
+						fontWeight: 'bold'
+					}}>الكمية المطلوبة:</label>
 					<input type='number' onChange={handleQty} defaultValue={1} className={styles.qty} />
 					<button onClick={handleAddToCart} className={styles.btn}>أضف للعربة</button>
 				</div>
 			</div>
 		</div>
 		
-			<div className={showImage ? styles.imageMagnifiedBlock : styles.imageMagnifiedNone}>
-				<ImageContainer image={product.image} title={product.title} />
-			</div>
+		<div className={showImage ? styles.imageMagnifiedBlock : styles.imageMagnifiedNone}>
+			<ImageContainer image={product.image} title={product.title} />
+		</div>
 		
 		{categories.map((category, i) => <ByCategory key={i} category={category}/>)}
 		</Fragment>
