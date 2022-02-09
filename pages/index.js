@@ -64,8 +64,7 @@ const Home = ({errorCode, productsList, byCategories, categories}) => {
 				/>
 				<SearchIcon onClick={handleSubmit} fontSize='large' className={styles.searchIcon} sx={{
 					color: 'gray',
-					cursor: 'pointer',
-          fontSize: 32
+					cursor: 'pointer'
 				}} />
 			</form>
       {/* END SEARCH BAR */}
