@@ -5,6 +5,7 @@ import styles from '../styles/Create.module.css';
 import Head from 'next/head';
 import { Editor } from '@tinymce/tinymce-react';
 // import { useQuill } from 'react-quilljs';
+const url = 'https://api-diabshopping.herokuapp.com/api/categories';
 
 const Create = props => {
 	// const [editorState, setEditorState] = useState(
@@ -18,8 +19,11 @@ const Create = props => {
 		subtitle: '',
 		price: '',
 		image: '',
-		category: ''
 	});
+	const [category, setCategory] = useState('');
+	const [subCategory, setSubCategory] = useState('');
+	const [categories, setCategories] = useState([]);
+	const [allSubCategory, setAllSubCategory] = useState([]);
 	const router = useRouter();
 
 	const {
@@ -29,20 +33,31 @@ const Create = props => {
 		price,
 		image,
 		file,
-		category
+		// category
 	} = values;
 
-	// useEffect(() => {
-	// 	if(quill){
-	// 		quill.on('text-change', (delta, oldDelta, source) => {
-	// 			console.log(quill.root.innerHTML)
-	// 			setValues({...values, desc: quill.root.innerHTML});
-	// 		})
-	// 	}
-	// }, [quill]);
+	useEffect(() => {
+		async function fetchData(){
+			const res = await axios.get(`${url}`);
+			setCategories(res.data);
+			
+			const subCat = await axios.get(`${url}/${category}`);
+			console.log('subcategory', subCat.data);
+			setAllSubCategory(subCat.data.subCategory);
+		};
+		fetchData();
+		console.log(allSubCategory)
+	}, [category]);
 
 	const handleChange = e => {
-		
+		if(e.target.name === 'category'){
+			setCategory(prev => e.target.value);
+		}
+		console.log('cat', category)
+		if(e.target.name === 'subCategory'){
+			setSubCategory(e.target.value)
+			console.log('subCategory update', subCategory)
+		}
 		setValues({...values, [e.target.name]:e.target.value});
 	}
 
@@ -54,25 +69,30 @@ const Create = props => {
 		const upload = await axios.post('https://api.cloudinary.com/v1_1/elselly/image/upload', formData);
 		const {url} = upload.data;
 		console.log(url)
+		console.log('subCategory', subCategory)
 		desc = editorRef.current.getContent();
-		const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts';
+		const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts/create';
+		
 		const res = await axios.post(`${urlCreate}`, {
 			title,
 			subtitle,
 			price,
 			desc,
 			image: url,
-			category
+			category,
+			subCategory
 		});
 
 		router.push(`/products/${res.data._id}`);
 	}
 
+	
+
 	return(
 		<Fragment>
 			<Head>
 				<title>Create Ordering App</title>
-				<meta name="description" content="Best pizza shop in town" />
+				<meta name="description" content="Diab shopping cart for home accessories" />
 				<link rel="icon" href="/favicon.ico" />			
 			</Head>
 		
@@ -153,17 +173,24 @@ const Create = props => {
 							onChange={handleChange}
 						/>
 					</div>
-					
 					<div className={styles.item}>
-						<label className={styles.label}>التصنيف</label>
-						<input 
-							className={styles.input}
-							type='text' 
-							name='category'
-							value={category}
-							onChange={handleChange}
-						/>
+						<label className={styles.label} htmlFor="category">التصنيف</label>
+						<select onChange={handleChange} className={styles.input} name="category" value={category} id="category">
+							{categories?.map(category => (
+								<option  key={category._id} value={category.main}>{category.main}</option>
+							))}							
+						</select>
 					</div>
+					<div className={styles.item}>
+						<label className={styles.label} htmlFor="category">تحت التصنيف</label>
+						<select onChange={handleChange} className={styles.input} name="subCategory" value={subCategory} id="category">
+							{allSubCategory?.map((category, i) => {
+								// console.log('categpr', category)
+							return <option  key={i} value={category}>{category}</option>
+							})}							
+						</select>
+					</div>
+					
 					<button onClick={handleClick} className={styles.btn}>إدخال</button>
 
 			</div>
