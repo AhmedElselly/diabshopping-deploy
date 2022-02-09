@@ -90,6 +90,11 @@
         justify-content: center;
     }
 
+    .alert {
+        left: 15%;
+        transform: translateX(0);
+    }
+
     .trTitle {
         display: none;
     }
