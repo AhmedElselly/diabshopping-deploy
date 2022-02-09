@@ -55,8 +55,16 @@ const Admin = props => {
 export const getServerSideProps = async ctx => {
 	try {
 		const myCookie = ctx.req.cookies
-		console.log(JSON.parse(myCookie.token).admin)
-		
+		console.log('admin?', JSON.parse(myCookie.token).user.admin)
+		const admin = JSON.parse(myCookie.token).user.admin;
+		if(!admin){
+			return {
+				redirect: {
+					destination: '/login',
+					permanent: false
+				}
+			}
+		}
 	} catch(err){
 		return {
 			redirect: {

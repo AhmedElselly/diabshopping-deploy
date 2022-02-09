@@ -52,12 +52,14 @@ const Navbar = (props) => {
 					<Link href='/products' passHref><li className={styles.listItem}>المنتجات</li></Link>				
 					
 					{/* <Link href='/contact'><li className={styles.listItem}>Contact</li></Link> */}
-					{isAuthenticated() && (
+					{isAuthenticated() && isAuthenticated().user.admin && (
 						<Fragment>
 							<Link href='/admin' passHref><li className={styles.listItem}>أدمن</li></Link>
 							<Link href='/create' passHref><li className={styles.listItem}>إنشاء</li></Link>							
-							<LogoutIcon onClick={handleLogout} sx={{marginLeft: 3, cursor: 'pointer'}}/>							
 						</Fragment>
+					)}
+					{isAuthenticated() && (
+						<LogoutIcon onClick={handleLogout} sx={{marginLeft: 3, cursor: 'pointer'}}/>
 					)}
 					{!isAuthenticated() && (
 						<Fragment>
@@ -90,15 +92,18 @@ const Navbar = (props) => {
 					<ul className={styles.list}>
 						<Link href='/' passHref><li className={styles.listItem}>الرئيسية</li></Link>
 						<Link href='/products' passHref><li className={styles.listItem}>المنتجات</li></Link>
-						{isAuthenticated() && isAuthenticated().admin && (
+						{isAuthenticated() && isAuthenticated().user.admin && (
 							<Fragment>
 								<Link href='/admin' passHref><li className={styles.listItem}>الأدمن</li></Link>
 								<Link href='/create' passHref><li className={styles.listItem}>إنشاء</li></Link>
-								<li onClick={handleLogout} className={styles.listItem}>
 								
-								الخروج
-								</li>
 							</Fragment>
+						)}
+						{isAuthenticated() && (
+							<li onClick={handleLogout} className={styles.listItem}>
+								
+							الخروج
+							</li>
 						)}
 						{!isAuthenticated() && (
 							<Fragment>

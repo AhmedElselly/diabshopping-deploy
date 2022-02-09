@@ -15,6 +15,7 @@ import { useState, Fragment } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import CategoryCard from '../components/CategoryCard'
+import { isAuthenticated } from '../actions/auth'
 
 const Home = ({errorCode, productsList, byCategories, categories}) => {
   const router = useRouter();
@@ -37,12 +38,13 @@ const Home = ({errorCode, productsList, byCategories, categories}) => {
     router.push(`/products?search=${cat}`)
   }
 
+  console.log(isAuthenticated())
 
   return (
     <div className={styles.container}>
       <Head>
         <title>Diab Shopping</title>
-        <meta name="description" content="Best pizza shop in town" />
+        <meta name="description" content="Diab shopping cart" />
         <link rel="icon" href="/favicon.ico" />
         
       </Head>

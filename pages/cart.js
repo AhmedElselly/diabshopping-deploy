@@ -48,7 +48,6 @@ const Cart = props => {
 			setSuccessMessage('تم الطلب وسيتم التواصل معك قريبا')
 			dispatch(reset());
 			
-			// router.push(`/orders/${res.data._id}`);
 		
 		} catch(err) {
 

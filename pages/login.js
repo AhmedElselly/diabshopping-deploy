@@ -4,6 +4,7 @@ import {login, authenticate} from '../actions/auth';
 import styles from '../styles/Login.module.css';
 import { useRouter } from 'next/router';
 import Container from '../components/Container';
+import Head from 'next/head';
 
 const Login = props => {
 	const router = useRouter();
@@ -32,6 +33,12 @@ const Login = props => {
 	
 	return(
 		<Fragment>
+			 <Head>
+				<title>الدخول</title>
+				<meta name="description" content="Diab shopping cart" />
+				<link rel="icon" href="/favicon.ico" />
+				
+			</Head>
 		<Container>
 		<div className={styles.wrapper}>
 			<form onSubmit={handleClick} className={styles.innerContainer}>
