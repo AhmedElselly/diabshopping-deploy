@@ -62,7 +62,7 @@ const Home = ({errorCode, productsList, byCategories, categories}) => {
 					onChange={handleChange}
 					className={styles.input}
 				/>
-				<SearchIcon onClick={handleSubmit} fontSize='small' className={styles.searchIcon} sx={{
+				<SearchIcon onClick={handleSubmit} fontSize='large' className={styles.searchIcon} sx={{
 					color: 'gray',
 					cursor: 'pointer'
 				}} />

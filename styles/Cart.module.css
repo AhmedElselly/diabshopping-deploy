@@ -121,17 +121,17 @@
     }
 
     .price::before {
-        content: 'Price: ';
+        content: 'السعر: ';
         font-weight: bold;
     }
 
     .qty::before {
-        content: 'Quantity: ';
+        content: 'الكمية: ';
         font-weight: bold;
     }
 
     .total::before {
-        content: 'Total: ';
+        content: 'الاجمالي: ';
     }
 
     .wrapper {
