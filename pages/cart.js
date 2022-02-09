@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import styles from '../styles/Cart.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import OrderDetailed from '../components/OrderDetailed';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import {useRouter} from 'next/router';
 import Alert from '../components/Alert';
 import Image from 'next/image';
+import Head from 'next/head';
 
 // import {
 // 	PayPalScriptProvider,
@@ -57,6 +58,13 @@ const Cart = props => {
 	const handleCash = (bool) => setCash(bool);
 
 	return(
+		<Fragment>
+			<Head>
+				<title>العربة</title>
+				<meta name="description" content="العربة" />
+				<link rel="icon" href="/favicon.ico" />
+				
+			</Head>
 		<div className={styles.container}>
 			<div className={successMessage ? styles.alert : styles.none}>
 				{success && (
@@ -90,7 +98,7 @@ const Cart = props => {
 							</td>
 							<td className={styles.td}>
 								<span className={styles.price}>
-									${product.price}
+									{product.price} جـ.م
 								</span>
 							</td>
 							<td className={styles.td}>
@@ -100,7 +108,7 @@ const Cart = props => {
 							</td>
 							<td className={styles.td}>
 								<span className={styles.total}>
-									${product.price * product.qty}
+								{product.price * product.qty} جـ.م
 								</span>
 							</td>
 						</tr>
@@ -112,13 +120,15 @@ const Cart = props => {
 				<div className={styles.wrapper}>
 					<h2 className={styles.title}>إجمالي العربة</h2>
 					<div className={styles.totalText}>
-						<b className={styles.totalTextTitle}>الاجمالي قبل الخصم: </b>${cart.total}
+						<b className={styles.totalTextTitle}>الاجمالي قبل الخصم: </b>
+						{cart.total} جـ.م
 					</div>
 					<div className={styles.totalText}>
-						<b className={styles.totalTextTitle}>الخصم: </b>$0.00
+						<b className={styles.totalTextTitle}>الخصم: </b>0.00 جـ.م
 					</div>
 					<div className={styles.totalText}>
-						<b className={styles.totalTextTitle}>الاجمالي بعد الخصم: </b>${cart.total}
+						<b className={styles.totalTextTitle}>الاجمالي بعد الخصم: </b>
+						{cart.total} جـ.م
 					</div>
 					<button onClick={() => setCash(true)} className={styles.btn}>أطلب</button>
 				</div>
@@ -127,6 +137,7 @@ const Cart = props => {
 				<OrderDetailed total={cart.total} cart={cart} handleCashProp={handleCash} createOrder={createOrder} />
 			)}
 		</div>
+		</Fragment>
 	)
 }
 
