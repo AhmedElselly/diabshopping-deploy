@@ -188,7 +188,7 @@ const Products = (props) => {
 				{/* Pagination */}
 				<div className={styles.paginationContainer}>
 					{countPages().map(c => {
-						return <div onClick={() => pagginationHandler(c)} key={c} className={Number(props.router.query.page) !== c ? (styles.page) : (styles.page1)} >{c}</div>
+						return <div key={c} onClick={() => pagginationHandler(c)} key={c} className={Number(props.router.query.page) !== c ? (styles.page) : (styles.page1)} >{c}</div>
 					})}
 				</div>
 				{/* Pagination */}
