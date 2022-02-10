@@ -77,7 +77,7 @@ const Product = ({product, categories}) => {
 			</div>
 			<div className={styles.left}>
 				<div onFocus={showImageContainer} tabIndex={0} onBlur={()=> setShowImage(false)} className={styles.imgContainer}>
-					<Image src={product.image} alt={product.title} layout='fill' />
+					<img src={product.image[0]} alt={product.title} className={styles.img} />
 				</div>
 			</div>
 			<div className={styles.right}>
@@ -122,7 +122,7 @@ const Product = ({product, categories}) => {
 		</div>
 		
 		<div className={showImage ? styles.imageMagnifiedBlock : styles.imageMagnifiedNone}>
-			<ImageContainer image={product.image} title={product.title} />
+			<ImageContainer image={product.image[0]} title={product.title} />
 		</div>
 		
 		{categories.map((category, i) => <ByCategory key={i} category={category}/>)}
@@ -132,7 +132,9 @@ const Product = ({product, categories}) => {
 
 export const getServerSideProps = async (ctx) => {
   const url = 'https://api-diabshopping.herokuapp.com/api/posts';
+  // const url = 'http://localhost:8000/api/posts';
   const res = await axios.get(`${url}/product/${ctx.params.id}`);
+	console.log(res.data)
 	const categories = await axios.get(`${url}/byCategories`);
   return {
     props: {

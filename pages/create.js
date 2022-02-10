@@ -13,12 +13,12 @@ const Create = props => {
   // );
 	// const { quill, quillRef } = useQuill();
 	const editorRef = useRef(null);
-	const [files, setFiles] = useState('');
+	const [files, setFiles] = useState([]);
 	const [values, setValues] = useState({
 		title: '',
 		subtitle: '',
 		price: '',
-		image: '',
+		image: [],
 	});
 	const [category, setCategory] = useState('');
 	const [subCategory, setSubCategory] = useState('');
@@ -58,32 +58,54 @@ const Create = props => {
 			setSubCategory(e.target.value)
 			console.log('subCategory update', subCategory)
 		}
-		setValues({...values, [e.target.name]:e.target.value});
+		// let value = e.target.name === 'image' ? e.target.files[0] : e.target.value;
+		// console.log([e.target.name],value)
+		setValues({...values, [e.target.name]: e.target.value});
 	}
 
 
 	const handleClick = async () => {
-		const formData = new FormData();
-		formData.append('file', files);
-		formData.append('upload_preset', 'hamzawy');
-		const upload = await axios.post('https://api.cloudinary.com/v1_1/elselly/image/upload', formData);
-		const {url} = upload.data;
-		console.log(url)
-		console.log('subCategory', subCategory)
 		desc = editorRef.current.getContent();
-		const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts/create';
 		
-		const res = await axios.post(`${urlCreate}`, {
-			title,
-			subtitle,
-			price,
-			desc,
-			image: url,
-			category,
-			subCategory
-		});
+		const formData = new FormData();
+		for(let i = 0; i < files.length; i++){
+			formData.append('image', files[i]);
+			console.log('files', files[i])
+		}
+		// for(let img in files){
+			
+		// 	formData.append('image', files[img]);
+		// 	console.log('files', files[img])
+		// }
+		// console.log('files', files)
+		
+		formData.append('title', title);
+		formData.append('subtitle', subtitle);
+		formData.append('price', price);
+		formData.append('desc', desc);
+		formData.append('category', category);
+		formData.append('subCategory', subCategory);
+		// formData.append('upload_preset', 'hamzawy');
+		// const upload = await axios.post('https://api.cloudinary.com/v1_1/elselly/image/upload', formData);
+		// const {url} = upload.data;
+		// console.log(url)
+		// console.log('subCategory', subCategory)
+		
+		// const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts/create';
+		const urlCreateDev = 'http://localhost:8000/api/posts/create';
+		console.log(formData)
+		const res = await axios.post(`${urlCreateDev}`, formData);
+		// const res = await axios.post(`${urlCreate}`, {
+		// 	title,
+		// 	subtitle,
+		// 	price,
+		// 	desc,
+		// 	image: url,
+		// 	category,
+		// 	subCategory
+		// });
 
-		router.push(`/products/${res.data._id}`);
+		// router.push(`/products/${res.data._id}`);
 	}
 
 	
@@ -126,7 +148,8 @@ const Create = props => {
 						<input 
 							className={styles.input}
 							type='file' 
-							onChange={e => setFiles(e.target.files[0])}
+							onChange={(e) => setFiles(e.target.files)}
+							multiple
 						/>
 					</div>
 					<div className={styles.item}>

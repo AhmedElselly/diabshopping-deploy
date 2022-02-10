@@ -5,7 +5,7 @@ const ImageContainer = ({image, title}) => {
 	return(
 		<div className={styles.container}>
 			<div className={styles.wrapper}>
-				<Image layout='responsive' width={50} height={50} src={image} alt={title} />
+				<img width={'100%'} height={'100%'} src={image} alt={title} />
 			</div>
 		</div>
 	)

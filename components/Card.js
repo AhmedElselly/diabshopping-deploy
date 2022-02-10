@@ -3,12 +3,13 @@ import Image from 'next/image';
 import styles from '../styles/Card.module.css';
 
 const Card = ({_id, title, subtitle, category, image,  price}) => {
+	console.log(image)
 	return(
 		<Link href={`/products/${_id}`} passHref>
 		
 			<div className={styles.card}>
 				<div className={styles.cardHeader}>
-					<Image width={500} height={300} src={image} alt={title} />
+					<img width={500} height={300} src={image} alt={title} />
 				</div>
 				<div className={styles.cardBody}>
 					<span className={styles.tag}>{price} جـ.م</span>

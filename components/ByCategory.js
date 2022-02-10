@@ -6,7 +6,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import useSWR from 'swr'
 
 const url = 'https://api-diabshopping.herokuapp.com/api';
 const ByCategory = ({category}) => {
@@ -61,7 +60,7 @@ const ByCategory = ({category}) => {
 
 	const listingPosts = () => {
 		return posts.map((product, i) => 
-			<Card style={{marginLeft: 15}} key={product._id} _id={product._id} title={product.title} category={product.category} image={product.image} subtitle={product.subtitle} price={product.price} />
+			<Card style={{marginLeft: 15}} key={product._id} _id={product._id} title={product.title} category={product.category} image={product.image instanceof Array ? product.image[0] : product.image} subtitle={product.subtitle} price={product.price} />
 		)
 	}
 	
