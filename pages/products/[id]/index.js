@@ -12,6 +12,7 @@ import ImageContainer from '../../../components/ImageContainer';
 
 const Product = ({product, categories}) => {
 	const [size, setSize] = useState(0);
+	const [basicImage, setBasicImage] = useState(product.image[0]);
 	const [showImage, setShowImage] = useState(false);
 	const [price, setPrice] = useState(product.price);
 	const [extras, setExtras] = useState([]);
@@ -62,6 +63,10 @@ const Product = ({product, categories}) => {
 		setShowImage(true);
 	}
 
+	const handleImage = image => {
+		setBasicImage(image)
+	}
+
 	return(
 		<Fragment>
 			<Head>
@@ -77,7 +82,7 @@ const Product = ({product, categories}) => {
 			</div>
 			<div className={styles.left}>
 				<div onFocus={showImageContainer} tabIndex={0} onBlur={()=> setShowImage(false)} className={styles.imgContainer}>
-					<img src={product.image[0]} alt={product.title} className={styles.img} />
+					<img src={basicImage} alt={product.title} className={styles.img} />
 				</div>
 			</div>
 			<div className={styles.right}>
@@ -87,25 +92,12 @@ const Product = ({product, categories}) => {
 				</div>
 				<span className={styles.price}>{price}جـ.م</span>
 
-				{product.extraOptions && (
+				{product.image.length <= 4 && (
 					<Fragment>
-						<h3 className={styles.choose}>Choose additional ingredients</h3>
-						<div className={styles.ingredients}>
-							<div className={styles.option}>
-								{product.extraOptions.map(option => (
-									<Fragment>
-										<input 
-										type='checkbox' 
-										id='double' 
-										name='double' 
-										className={styles.checkbox} 
-										onChange={e => handleChange(e, option)}
-									/>
-									<label htmlFor='double'>Double Ingredients</label>
-									</Fragment>
-								))}
-							</div>
-							
+						<div className={styles.additionalImagesContainer}>
+							{product.image.map(image => (
+								<img onClick={() => handleImage(image)} className={styles.additionalImage} src={image} alt={product.title} />	
+							))}
 						</div>
 					</Fragment>
 				)}

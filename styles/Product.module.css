@@ -36,6 +36,18 @@
     height: 100%;
 }
 
+.additionalImagesContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.additionalImage {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
 .imageMagnifiedNone {
     display: none;
 }
@@ -159,6 +171,23 @@
     .imgContainer {
         width: 70vw;
         height: 50vh;
+    }
+
+
+    .additionalImagesContainer {
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .additionalImage {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        margin-top: 20px;
     }
 
     .title {
