@@ -114,7 +114,7 @@ const Product = ({product, categories}) => {
 		</div>
 		
 		<div className={showImage ? styles.imageMagnifiedBlock : styles.imageMagnifiedNone}>
-			<ImageContainer image={product.image[0]} title={product.title} />
+			<ImageContainer image={basicImage} title={product.title} />
 		</div>
 		
 		{categories.map((category, i) => <ByCategory key={i} category={category}/>)}
