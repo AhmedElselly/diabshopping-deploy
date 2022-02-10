@@ -78,11 +78,11 @@ const Products = (props) => {
 		let content = null;
 		if(!isLoading && !searched){
 			content = props.docs.map(product => (
-				<Card key={product._id} _id={product._id} title={product.title} category={product.category} subtitle={product.subtitle} desc={product.desc} image={product.image} price={product.price} />
+				<Card key={product._id} _id={product._id} title={product.title} category={product.category} subtitle={product.subtitle} desc={product.desc} image={product.image instanceof Array ? product.image[0] : product.image} price={product.price} />
 			))
 		} else if (searched){
 			content = products.map(product => (
-				<Card key={product._id} _id={product._id} title={product.title} category={product.category} subtitle={product.subtitle} desc={product.desc} image={product.image} price={product.price} />
+				<Card key={product._id} _id={product._id} title={product.title} category={product.category} subtitle={product.subtitle} desc={product.desc} image={product.image instanceof Array ? product.image[0] : product.image} price={product.price} />
 			))
 		} else {
 			content = <Loading/>
