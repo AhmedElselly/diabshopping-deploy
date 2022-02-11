@@ -11,18 +11,19 @@ import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import { useState, ReactDOM } from 'react';
 import { useRouter } from 'next/router';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const CategoryCard = ({category, subCategory}) => {
 	const router = useRouter();
 	const [checked, setChecked] = useState(false);
 
 	const handleClick = () => {
-		setChecked(!checked);
+		setChecked(prev => !prev);
 	}
 
 	
 	const handleUncheck = () => {
-		setChecked(!checked);
+		setChecked(false);
 	}
 
 	const handleRoute = sub => {
@@ -31,19 +32,21 @@ const CategoryCard = ({category, subCategory}) => {
 	}
 
 	return(
-		<div onFocus={handleClick} tabIndex={0} onBlur={handleUncheck} className={styles.container}>
-			<div className={styles.iconContainer}>
-				<MicrowaveIcon/>
+		<ClickAwayListener onClickAway={handleUncheck}>
+			<div onClick={handleClick} tabIndex={0} className={styles.container}>
+				<div className={styles.iconContainer}>
+					<MicrowaveIcon/>
+				</div>
+				<span>{category.main}</span>
+				{subCategory && (
+					<div style={{display: checked ? 'block' : 'none'}} className={styles.subCategory}>
+						{subCategory.map((sub, i) => (
+							<div key={i} onClick={() => handleRoute(sub)} className={styles.subText}>{sub}</div>
+						))}
+					</div>	
+				)}			
 			</div>
-			<span>{category.main}</span>
-			{subCategory && (
-				<div style={{display: checked ? 'block' : 'none'}} className={styles.subCategory}>
-					{subCategory.map((sub, i) => (
-						<div key={i} onClick={() => handleRoute(sub)} className={styles.subText}>{sub}</div>
-					))}
-				</div>	
-			)}			
-		</div>
+		</ClickAwayListener>
 	)
 }
 
