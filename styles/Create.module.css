@@ -8,7 +8,8 @@
 }
 
 .imageContainer {
-    display: block;
+    display: flex;
+    justify-content: space-between;
 }
 
 .title {

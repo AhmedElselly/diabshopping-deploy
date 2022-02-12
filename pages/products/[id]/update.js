@@ -5,17 +5,25 @@ import axios from 'axios';
 import {useRouter} from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const url = 'https://api-diabshopping.herokuapp.com/api/categories';
 
 const UpdateCard = ({post}) => {
 	const router = useRouter()
 	const editorRef = useRef(null);
+	const [open, setOpen] = useState(false);
 	const [files, setFiles] = useState('');
 	const [category, setCategory] = useState(post.category);
 	const [subCategory, setSubCategory] = useState(post.subCategory);
 	const [categories, setCategories] = useState([]);
 	const [allSubCategory, setAllSubCategory] = useState([]);
+	const [selected, setSelected] = useState([]);
+	const [alert, setAlert] = useState('يجب أﻻ يتعدى عدد الصور إلى 4 صور');
 	console.log('sub', subCategory)
 	const [values, setValues] = useState({
 		_id: post._id,
@@ -49,6 +57,26 @@ const UpdateCard = ({post}) => {
 		fetchData();
 	}, [category]);
 
+	const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+	const action = (
+    <Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" sx={{mr: 5}} />
+      </IconButton>
+    </Fragment>
+  );
 
 	const handleChange = async e => {
 		if(e.target.name === 'category'){
@@ -64,30 +92,50 @@ const UpdateCard = ({post}) => {
 	}
 
 	const handleClick = async () => {
-		let url;
-		if(files){
-			const formData = new FormData();
-			formData.append('file', files);
-			formData.append('upload_preset', 'hamzawy');
-			const upload = await axios.post('https://api.cloudinary.com/v1_1/elselly/image/upload', formData);
-			url = upload.data.url;
-			console.log(url)
-		}
-		
 		desc = editorRef.current.getContent();
-		const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts/product';
-		const res = await axios.put(`${urlCreate}/${_id}/update`, {
-			title,
-			subtitle,
-			price,
-			desc,
-			image: url || image,
-			category,
-			subCategory
-		});
+		const formData = new FormData();
+		
+		for(let i = 0; i < files.length; i++){
+			formData.append('image', files[i]);
+			console.log('files', files[i])
+		}
 
+		let images = image.length + (files.length - selected.length);
+		let total = 4;
+		console.log(images)
+		if(images > total){
+			setOpen(true);
+			return;
+		}
+
+		formData.append('title', title);
+		formData.append('subtitle', subtitle);
+		formData.append('price', price);
+		formData.append('desc', desc);
+		formData.append('category', category);
+		formData.append('subCategory', subCategory);
+		formData.append('selected', selected);
+		
+		
+		const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts/product';
+		// const urlCreate = 'http://localhost:8000/api/posts/product';
+		const res = await axios.put(`${urlCreate}/${_id}/update`, formData);
+		console.log(res.data)
 		router.push(`/products/${res.data._id}`);
 	}
+
+	const marked = (i) => {
+		
+		// console.log(selected.indexOf(image[i]))
+		if(selected.indexOf(image[i]) === -1){
+			console.log(image[i]);
+			setSelected(prev => [...prev, image[i]]);
+		} else {
+			setSelected(selected.filter(img => image[i] !== img))
+		}
+		
+	}
+	console.log(files)
 
 	return(
 		<Fragment>
@@ -98,6 +146,7 @@ const UpdateCard = ({post}) => {
         
       </Head>
 		<div className={styles.container}>
+			
 			<div className={styles.wrapper}>
 				<h3>تعديل {post.title}</h3>
 				<div className={styles.item}>
@@ -123,12 +172,19 @@ const UpdateCard = ({post}) => {
 					<div className={styles.item}>
 						<label className={styles.label}>الصور</label>
 						<input 
+							multiple
 							className={styles.input}
 							type='file' 
-							onChange={e => setFiles(e.target.files[0])}
+							onChange={e => setFiles(e.target.files)}
 						/>
 						<div className={styles.imageContainer}>
-							<Image width={100} height={100} src={image} alt={title} />
+							{image.map((img, i) => (
+								<div key={i} onClick={() => marked(i)}>
+									<img width={100} style={{
+										border: selected.indexOf(image[i]) === -1 ? 'none' : '1px solid red'
+									}} height={100} src={img} alt={title} />
+								</div>
+							))}							
 						</div>
 					</div>
 					<div className={styles.item}>
@@ -189,6 +245,13 @@ const UpdateCard = ({post}) => {
 
 			</div>
 		</div>
+		<Snackbar
+			open={open}
+			autoHideDuration={6000}
+			onClose={handleClose}
+			message={alert}
+			action={action}
+		/>
 		</Fragment>
 	)
 }
