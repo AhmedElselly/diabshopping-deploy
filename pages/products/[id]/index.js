@@ -26,6 +26,11 @@ const Product = ({product, categories}) => {
 	}
 
 	useEffect(() => {
+		setBasicImage(product.image[0]);
+	}, [product.image[0]]);
+
+
+	useEffect(() => {
 		if(success){
 			setTimeout(() => {
 				setSuccess(false)

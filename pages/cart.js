@@ -84,7 +84,7 @@ const Cart = props => {
 							<td className={styles.td}>
 								<div className={styles.imgContainer}>
 									<Image 
-										src={product.image}
+										src={product.image[0]}
 										alt={product.title}
 										width={'100%'}
 										height={'100%'}
