@@ -4,6 +4,11 @@ import { useState, Fragment, useRef, useEffect } from 'react';
 import styles from '../styles/Create.module.css';
 import Head from 'next/head';
 import { Editor } from '@tinymce/tinymce-react';
+
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+
 // import { useQuill } from 'react-quilljs';
 const url = 'https://api-diabshopping.herokuapp.com/api/categories';
 
@@ -13,6 +18,8 @@ const Create = props => {
   // );
 	// const { quill, quillRef } = useQuill();
 	const editorRef = useRef(null);
+	const [open, setOpen] = useState(false);
+	const [alert, setAlert] = useState('يجب أﻻ يتعدى عدد الصور إلى 4 صور');
 	const [files, setFiles] = useState([]);
 	const [values, setValues] = useState({
 		title: '',
@@ -49,6 +56,28 @@ const Create = props => {
 		console.log(allSubCategory)
 	}, [category]);
 
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+		  return;
+		}
+	
+		setOpen(false);
+	};
+
+
+	const action = (
+    <Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" sx={{mr: 5}} />
+      </IconButton>
+    </Fragment>
+  );
+
 	const handleChange = e => {
 		if(e.target.name === 'category'){
 			setCategory(prev => e.target.value);
@@ -72,12 +101,14 @@ const Create = props => {
 			formData.append('image', files[i]);
 			console.log('files', files[i])
 		}
-		// for(let img in files){
-			
-		// 	formData.append('image', files[img]);
-		// 	console.log('files', files[img])
-		// }
-		// console.log('files', files)
+
+		// let images = image.length + (files.length - selected.length);
+		let total = 4;
+		// console.log(images)
+		if(files.length > total){
+			setOpen(true);
+			return;
+		}
 		
 		formData.append('title', title);
 		formData.append('subtitle', subtitle);
@@ -85,27 +116,15 @@ const Create = props => {
 		formData.append('desc', desc);
 		formData.append('category', category);
 		formData.append('subCategory', subCategory);
-		// formData.append('upload_preset', 'hamzawy');
-		// const upload = await axios.post('https://api.cloudinary.com/v1_1/elselly/image/upload', formData);
-		// const {url} = upload.data;
-		// console.log(url)
-		// console.log('subCategory', subCategory)
 		
-		// const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts/create';
-		const urlCreateDev = 'http://localhost:8000/api/posts/create';
+		
+		const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts/create';
+		// const urlCreate = 'http://localhost:8000/api/posts/create';
 		console.log(formData)
-		const res = await axios.post(`${urlCreateDev}`, formData);
-		// const res = await axios.post(`${urlCreate}`, {
-		// 	title,
-		// 	subtitle,
-		// 	price,
-		// 	desc,
-		// 	image: url,
-		// 	category,
-		// 	subCategory
-		// });
+		const res = await axios.post(`${urlCreate}`, formData);
+		
 
-		// router.push(`/products/${res.data._id}`);
+		router.push(`/products/${res.data._id}`);
 	}
 
 	
@@ -218,6 +237,13 @@ const Create = props => {
 
 			</div>
 		</div>
+		<Snackbar
+			open={open}
+			autoHideDuration={6000}
+			onClose={handleClose}
+			message={alert}
+			action={action}
+		/>
 		</Fragment>
 	)
 }
