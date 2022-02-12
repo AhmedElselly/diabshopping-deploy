@@ -7,6 +7,7 @@ import {useRouter} from 'next/router';
 import Alert from '../components/Alert';
 import Image from 'next/image';
 import Head from 'next/head';
+import { reset, removeItem } from '../redux/cartSlice';
 
 // import {
 // 	PayPalScriptProvider,
@@ -45,7 +46,7 @@ const Cart = props => {
 			const res = await axios.post(`${url}`, data);
 			console.log(res.data)
 			setSuccess(true);
-			setSuccessMessage('تم الطلب وسيتم التواصل معك قريبا')
+			setSuccessMessage('تم ارسال الطلب وسيتم التواصل معك قريبا')
 			dispatch(reset());
 			
 		
@@ -55,6 +56,10 @@ const Cart = props => {
 	}
 
 	const handleCash = (bool) => setCash(bool);
+
+	// const reset = () => {
+	// 	dispatch(reset())
+	// }
 
 	return(
 		<Fragment>
@@ -78,6 +83,7 @@ const Cart = props => {
 						<th>السعر</th>
 						<th>الكمية</th>
 						<th>الاجمالي</th>
+						<th></th>
 					</tr>
 					{cart.products.map(product => (
 						<tr className={styles.tr} key={product._id}>
@@ -110,6 +116,11 @@ const Cart = props => {
 								{product.price * product.qty} جـ.م
 								</span>
 							</td>
+							<td className={styles.td}>
+								<button onClick={() => dispatch(removeItem(product))} className={styles.btnDanger}>
+								حذف
+								</button>
+							</td>
 						</tr>
 					))}
 					
@@ -130,12 +141,15 @@ const Cart = props => {
 						{cart.total} جـ.م
 					</div>
 					<button onClick={() => setCash(true)} className={styles.btn}>أطلب</button>
+					<button className={styles.btnDanger} onClick={() => dispatch(reset())}>حذف السلة </button>
 				</div>
 			</div>
 			{cash && (
 				<OrderDetailed total={cart.total} cart={cart} handleCashProp={handleCash} createOrder={createOrder} />
 			)}
 		</div>
+
+		
 		</Fragment>
 	)
 }
