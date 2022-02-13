@@ -12,7 +12,7 @@ import 'rc-slider/assets/index.css';
 import Loading from '../../components/Loading';
 import CategoryCard from '../../components/CategoryCard';
 
-const url = 'https://api-diabshopping.herokuapp.com/api';
+const url = 'http://diabshopping.com/api';
 
 const Products = (props) => {
 	const [search, setSearch] = useState('');

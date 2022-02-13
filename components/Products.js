@@ -20,7 +20,7 @@ const Products = props => {
 	}
 
 	const handleRemove = async (id) => {
-		const url = 'https://api-diabshopping.herokuapp.com/api';
+		const url = 'http://diabshopping.com/api';
 		const res = await axios.delete(`${url}/posts/product/${id}/remove`);
 		
 		setPosts(posts.filter(post => post._id !== id));

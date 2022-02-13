@@ -11,7 +11,7 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-const url = 'https://api-diabshopping.herokuapp.com/api/categories';
+const url = 'http://diabshopping.com/api/categories';
 
 const UpdateCard = ({post}) => {
 	const router = useRouter()
@@ -117,7 +117,7 @@ const UpdateCard = ({post}) => {
 		formData.append('selected', selected);
 		
 		
-		const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts/product';
+		const urlCreate = 'http://diabshopping.com/api/posts/product';
 		// const urlCreate = 'http://localhost:8000/api/posts/product';
 		const res = await axios.put(`${urlCreate}/${_id}/update`, formData);
 		console.log(res.data)
@@ -257,7 +257,7 @@ const UpdateCard = ({post}) => {
 }
 
 export const getServerSideProps = async ctx => {
-	const url = 'https://api-diabshopping.herokuapp.com/api/posts/product'
+	const url = 'http://diabshopping.com/api/posts/product'
 	const res = await axios.get(`${url}/${ctx.query.id}`);
 
 	return {

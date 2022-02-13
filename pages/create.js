@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 // import { useQuill } from 'react-quilljs';
-const url = 'https://api-diabshopping.herokuapp.com/api/categories';
+const url = 'http://diabshopping.com/api/categories';
 
 const Create = props => {
 	// const [editorState, setEditorState] = useState(
@@ -118,7 +118,7 @@ const Create = props => {
 		formData.append('subCategory', subCategory);
 		
 		
-		const urlCreate = 'https://api-diabshopping.herokuapp.com/api/posts/create';
+		const urlCreate = 'http://diabshopping.com/api/posts/create';
 		// const urlCreate = 'http://localhost:8000/api/posts/create';
 		console.log(formData)
 		const res = await axios.post(`${urlCreate}`, formData);

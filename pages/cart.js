@@ -36,7 +36,7 @@ const Cart = props => {
 		}
 	}, [success]);
 
-	const url = 'https://api-diabshopping.herokuapp.com/api/orders/create';
+	const url = 'http://diabshopping.com/api/orders/create';
 
 	const createOrder = async data => {
 		

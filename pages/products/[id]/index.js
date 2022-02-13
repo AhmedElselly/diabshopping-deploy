@@ -128,7 +128,7 @@ const Product = ({product, categories}) => {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const url = 'https://api-diabshopping.herokuapp.com/api/posts';
+  const url = 'http://diabshopping.com/api/posts';
   // const url = 'http://localhost:8000/api/posts';
   const res = await axios.get(`${url}/product/${ctx.params.id}`);
 	console.log(res.data)

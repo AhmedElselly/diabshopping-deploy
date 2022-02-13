@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://api-diabshopping.herokuapp.com/api/posts';
+const url = 'http://diabshopping.com/api/posts';
 
 export const featuredPosts = async () => {
     const res = await axios.get(`${url}/home`);
