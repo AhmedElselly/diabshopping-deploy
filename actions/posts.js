@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://diabshopping.com/api/posts';
+const url = 'https://diabshopping.com/api/posts';
 
 export const featuredPosts = async () => {
     const res = await axios.get(`${url}/home`);

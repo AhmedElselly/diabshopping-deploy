@@ -94,7 +94,7 @@ const Home = ({errorCode, productsList, byCategories, categories}) => {
 
 export const getServerSideProps = async (ctx) => {
   const myCookie = ctx.req.cookies;
-  const url = 'http://diabshopping.com/api';
+  const url = 'https://diabshopping.com/api';
   // const url = 'http://localhost:8000/api';
   const res = await axios.get(`${url}/posts/home`);
   const byCategories = await axios.get(`${url}/posts/byCategories`);

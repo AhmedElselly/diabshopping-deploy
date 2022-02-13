@@ -36,7 +36,7 @@ const Cart = props => {
 		}
 	}, [success]);
 
-	const url = 'http://diabshopping.com/api/orders/create';
+	const url = 'https://diabshopping.com/api/orders/create';
 
 	const createOrder = async data => {
 		

@@ -117,7 +117,7 @@ const UpdateCard = ({post}) => {
 		formData.append('selected', selected);
 		
 		
-		const urlCreate = 'http://diabshopping.com/api/posts/product';
+		const urlCreate = 'https://diabshopping.com/api/posts/product';
 		// const urlCreate = 'http://localhost:8000/api/posts/product';
 		const res = await axios.put(`${urlCreate}/${_id}/update`, formData);
 		console.log(res.data)
@@ -257,7 +257,7 @@ const UpdateCard = ({post}) => {
 }
 
 export const getServerSideProps = async ctx => {
-	const url = 'http://diabshopping.com/api/posts/product'
+	const url = 'https://diabshopping.com/api/posts/product'
 	const res = await axios.get(`${url}/${ctx.query.id}`);
 
 	return {
